@@ -1,0 +1,13 @@
+@use "../ASHPARTS/interfaces/app";
+@use "../ASHPARTS/components/link";
+@use "../ASHPARTS/layouts/article";
+
+@include link.new;
+@include link.inline;
+@include app.faq;
+
+#{article.$select} {
+    h1 {
+        font-size: 4.5rem;
+    }
+}

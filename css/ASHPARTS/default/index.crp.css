@@ -1,0 +1,56 @@
+/**
+* @prettier
+*/
+/**
+* @prettier
+*/
+/**
+* @prettier
+*/
+/**
+* @prettier
+*/
+/**
+* @prettier
+*/
+/**
+* @prettier
+*/
+/**
+* @prettier
+*/
+/**
+* @prettier
+*/
+.hero {
+  text-align: center;
+  background: #867e68;
+  color: white;
+}
+.hero__group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-items: center;
+}
+.hero__group > * {
+  flex: 1 1 400px;
+}
+.hero h1 {
+  font-size: 3.4rem;
+  max-width: 50rem;
+  margin: auto;
+}
+.hero__content {
+  margin: 2rem;
+}
+.hero__content > * + * {
+  margin-top: 3rem;
+}
+
+.contain--hero::before {
+  padding-bottom: calc(100% / (1.7571059432));
+}
+
+/*# sourceMappingURL=index.crp.css.map */

@@ -1,0 +1,87 @@
+.banner--oos {
+  background: #ffd890;
+  color: #232f3e;
+  text-transform: capitalize;
+}
+
+.view__anchor {
+  top: -9.4rem;
+}
+@media all and (max-width: 1080px) {
+  .view__anchor {
+    top: -10rem;
+  }
+}
+@media all and (max-width: 560px) {
+  .view__anchor {
+    top: -11.6rem;
+  }
+}
+@media all and (max-width: 365px) {
+  .view__anchor {
+    top: -13.2rem;
+  }
+}
+
+[href="#order"] {
+  display: none !important;
+}
+
+.nav__list {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@keyframes is-oos {
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(-0.45rad);
+  }
+}
+.oos {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: #00caff;
+  color: #232f3e;
+  border: 2px solid currentColor;
+  padding: 0.25em;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  width: 13em;
+  height: 1.5em;
+  z-index: 1;
+  transform-origin: center center;
+  transform: scale(1.5) rotate(-0.45rad);
+  opacity: 0;
+  animation: is-oos 0.3s cubic-bezier(0, 1.05, 0.58, 1) 0.5s forwards;
+  font-size: 2em;
+}
+@media all and (max-width: 1100px) {
+  .oos {
+    font-size: 3vw;
+    top: -2em;
+  }
+}
+@media all and (max-width: 900px) {
+  .oos {
+    font-size: 4vw;
+  }
+}
+@media all and (max-width: 600px) {
+  .oos {
+    font-size: 5vw;
+  }
+}
+@media all and (min-width: 0) {
+  .oos {
+    font-size: clamp(0.25em, 6vw, 2em);
+  }
+}
+
+/*# sourceMappingURL=oos.css.map */

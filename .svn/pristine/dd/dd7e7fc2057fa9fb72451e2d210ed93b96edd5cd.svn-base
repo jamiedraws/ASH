@@ -1,0 +1,81 @@
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../models/queries";
+
+$select: ".paypal-credit-banner" !default;
+
+@mixin unbind-minmax {
+	min-width: 0;
+	max-width: none;
+}
+
+@mixin position-banner {
+	.paypal-credit-banner__placeitem {
+		@include arp.fill;
+		@include unbind-minmax;
+	}
+}
+
+@mixin ui {
+	#{$select} {
+		display: block;
+		position: relative;
+		z-index: 1;
+		margin: auto;
+
+		&[data-pp-style-color="blue"] {
+			background: linear-gradient(-55deg, #0084ca 50%, #003087 75%);
+		}
+
+		iframe {
+			height: 100%;
+		}
+	}
+
+	.paypal-credit-text {
+		display: inline-flex;
+		align-items: center;
+		font-weight: bold;
+
+		> picture {
+			width: 107px;
+			margin-left: 0.5em;
+		}
+	}
+
+	@media all and (min-width: 769px) {
+		@include arp.apply(".paypal-credit-banner__placeholder", 20/1) {
+			max-width: queries.get(desktop);
+			margin: auto;
+			@include position-banner;
+		}
+	}
+
+	@media all and (max-width: 768px) {
+		@include arp.apply(".paypal-credit-banner__placeholder", 750/125) {
+			@include position-banner;
+		}
+	}
+
+	@media all and (max-width: 300px) {
+		@include arp.apply(".paypal-credit-banner__placeholder", 1/1) {
+			@include position-banner;
+		}
+	}
+}
+
+@mixin onsite-message {
+	#{$select} {
+		&--onsite-message {
+			display: block;
+			margin: auto;
+		}
+
+		&__message {
+			text-align: center;
+			font-style: italic;
+			display: block;
+		}
+	}
+
+	@content;
+}

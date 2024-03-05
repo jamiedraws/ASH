@@ -1,0 +1,70 @@
+@use "../../shared/css/template/dtm/utils/scope";
+@use "../models/fonts";
+@use "../models/colors";
+
+$-slide: ".slide" !default;
+
+@mixin ui {
+    .review {
+        $width: 43em;
+
+        &--slide {
+            max-width: 50em;
+            margin: auto;
+            position: relative;
+            @include fonts.first(1em, 1) {
+                text-transform: initial;
+                text-align: center;
+            }
+        }
+
+        &__item {
+            padding: 2em 4em;
+            flex: 1;
+
+            &--stacked {
+                margin: 0;
+                border-bottom: 0.15em solid #cccccc;
+                padding: 1.5em 0;
+
+                &:last-of-type {
+                    border-bottom: none;
+                }
+            }
+        }
+
+        &__item--stacked &__stars {
+            margin: 0 0 1em;
+            max-width: 10em;
+        }
+
+        &__text {
+            font-size: 1.1em;
+            font-weight: 500;
+            line-height: 1.45;
+        }
+
+        &__stars {
+            max-width: 17em;
+            margin: auto;
+        }
+
+        &__stars + &__text {
+            margin: 1em 0;
+        }
+
+        #{$-slide} {
+            &__into {
+                max-width: $width;
+                margin: auto;
+            }
+        }
+    }
+
+    @include scope.for-template(".dtm", ".dtm__in") {
+        .review__stars {
+            max-width: 9em;
+            margin: 0 0 0.5em;
+        }
+    }
+}

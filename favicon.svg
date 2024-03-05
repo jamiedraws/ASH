@@ -1,0 +1,28 @@
+<svg id="Logo" xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 8.913px;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        fill: #232f3e;
+        text-anchor: middle;
+        font-family: "Amazon Ember";
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .cls-2 {
+        font-size: 8.131px;
+      }
+
+      .cls-3 {
+        font-size: 9.21px;
+      }
+    </style>
+  </defs>
+  <text id="Starter_kit" data-name="Starter kit" class="cls-1" transform="translate(1102.52 1667.451) scale(74.249 74.292)"><tspan x="0">Starter kit</tspan></text>
+  <text id="Smart_Home" data-name="Smart Home" class="cls-2" transform="translate(1102.52 1060.081) scale(74.249 74.292)"><tspan x="0">Smart Home</tspan></text>
+  <text id="Alexa" class="cls-3" transform="translate(1127.762 493.283) scale(74.249 74.292)"><tspan x="0">Alexa</tspan></text>
+</svg>

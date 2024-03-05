@@ -1,0 +1,281 @@
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../models/fonts";
+@use "../models/colors";
+@use "../models/queries";
+@use "../interfaces/ui-copy" as copy;
+@use "../interfaces/ui-addons" as addons;
+@use "../components/paypal-credit-banners" as paypal;
+@use "../components/toggle";
+
+$-select: ".offer-card" !default;
+$-breakpoint-mobile: 330px;
+$-breakpoint-tablet: queries.get(mobile);
+
+@mixin ui {
+    $-border-color: #a9a9a9;
+
+    @include arp.apply("#{$-select}__picture > picture", 517/382, 517px);
+
+    #{$-select} {
+        @include paypal.ui;
+        @include copy.index;
+        @include addons.ui;
+        @include toggle.init;
+
+        & &__banner {
+            background: colors.get(first);
+            color: white;
+            text-transform: uppercase;
+
+            h2 {
+                color: currentColor;
+                font-size: clamp(1.75em, 8vw, 2.5em);
+            }
+
+            &::selection {
+                background: colors.get(second);
+            }
+
+            &:not(:last-child) {
+                padding: 0;
+            }
+        }
+
+        &__group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 -1em;
+            overflow: hidden;
+        }
+
+        &__item {
+            flex: 0 1 517px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            @supports (display: grid) {
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(2, min-content) 1fr repeat(
+                        2,
+                        min-content
+                    );
+                grid-template-areas:
+                    "header"
+                    "picture"
+                    "list"
+                    "price"
+                    "nav";
+            }
+
+            @media all and (min-width: $-breakpoint-mobile) {
+                grid-template-columns: repeat(auto-fit, minmax(55vw, 1fr));
+                grid-template-areas:
+                    "header header"
+                    "picture price"
+                    "list list"
+                    "nav nav";
+            }
+
+            @media all and (min-width: $-breakpoint-tablet) {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(2, min-content) 1fr repeat(
+                        2,
+                        min-content
+                    );
+                grid-template-areas:
+                    "header"
+                    "picture"
+                    "list"
+                    "price"
+                    "nav";
+            }
+
+            margin: 1em;
+            border-radius: 10px;
+            overflow: hidden;
+
+            border: 1px solid $-border-color;
+        }
+
+        & &__header {
+            text-align: center;
+            padding: 0.5em;
+            font-size: 1.7em;
+            font-size: clamp(1em, 7vw, 1.7em);
+            width: 100%;
+            font-weight: bold;
+            text-transform: uppercase;
+            background: colors.get(first);
+            color: white;
+
+            @supports (display: grid) {
+                grid-area: header;
+                align-self: start;
+            }
+
+            &::selection {
+                background: colors.get(second);
+            }
+        }
+
+        &__picture {
+            background: #ededed;
+            flex: 0 1 auto;
+            width: 100%;
+
+            @supports (display: grid) {
+                grid-area: picture;
+                align-self: start;
+            }
+        }
+
+        & &__list {
+            flex: 0 0 auto;
+            width: 100%;
+            box-shadow: none;
+            @include fonts.first(1em);
+            font-weight: normal;
+
+            @supports (display: grid) {
+                grid-area: list;
+                align-self: start;
+            }
+
+            &,
+            &:not(:last-child) {
+                padding: 1em;
+            }
+
+            .addons {
+                &__in {
+                    @media all and (min-width: $-breakpoint-tablet) {
+                        margin: 0 1em;
+                    }
+                }
+
+                &__title {
+                    border: none;
+                }
+
+                &__sub-list {
+                    font-size: 0.8em;
+
+                    li::before {
+                        content: "+";
+                        font-size: 100%;
+                    }
+                }
+            }
+        }
+
+        &__price {
+            width: 100%;
+            flex: 0 1 auto;
+            padding: 0 1em;
+            text-align: center;
+            border-top: 1px solid $-border-color;
+            margin: auto 2em 0;
+            padding: 1em;
+            font-size: clamp(0.75em, 4vw, 1em);
+
+            @media all and (min-width: $-breakpoint-mobile) {
+                text-align: left;
+                border-top: 0;
+                margin: 0;
+            }
+
+            @media all and (min-width: $-breakpoint-tablet) {
+                text-align: center;
+                border-top: 1px solid $-border-color;
+                margin: auto 2em 0;
+                padding: 1em;
+            }
+
+            .paypal-credit-text {
+                display: inline-block;
+                @media all and (min-width: $-breakpoint-tablet) {
+                    margin: 0 4em;
+                }
+
+                font-weight: normal;
+
+                > picture {
+                    display: inline-block;
+                    max-width: 107px;
+                    max-height: 14px;
+                    width: 100%;
+                    margin-left: 0.15em;
+                    margin-bottom: -0.15em;
+                }
+            }
+
+            @supports (display: grid) {
+                width: auto;
+                grid-area: price;
+            }
+        }
+
+        &__nav {
+            padding: 0;
+            display: flex;
+            width: 100%;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            @media all and (min-width: $-breakpoint-tablet) {
+                padding: 0 1em 1.75em;
+            }
+
+            @supports (display: grid) {
+                grid-area: nav;
+            }
+
+            .button {
+                font-size: 1.4em;
+                font-size: clamp(1.1em, 5vw, 1.4em);
+                flex: 1;
+                line-height: 1.1;
+
+                @media all and (min-width: $-breakpoint-tablet) {
+                    padding: 0.5em 2.5em;
+                    flex: 0 1 auto;
+                }
+
+                &--accent {
+                    display: none;
+
+                    @media all and (min-width: $-breakpoint-mobile) {
+                        display: block;
+                    }
+
+                    @media all and (min-width: $-breakpoint-tablet) {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        @content;
+    }
+}
+
+@mixin highlight {
+    #{$-select} {
+        &__highlight {
+            border-color: colors.get(second);
+            border-width: 4px;
+        }
+
+        &__highlight &__header {
+            background: colors.get(second);
+            color: colors.get(first);
+
+            &::selection {
+                background: colors.get(first);
+            }
+        }
+    }
+}

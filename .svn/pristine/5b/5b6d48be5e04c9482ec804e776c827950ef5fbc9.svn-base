@@ -1,0 +1,33 @@
+/**
+* @prettier
+*/
+
+@use "../layouts/group";
+@use "../layouts/slide";
+@use "../../../Shared/css/slide/1/components/thumbnails";
+
+$namespace: "review" !default;
+
+@mixin new {
+    @include slide.overlay-nav-buttons(#{slide.$select}--#{$namespace});
+
+    #{slide.$select} {
+        &--#{$namespace} {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 84rem;
+            margin: auto;
+            //@include group.gutter(0.5rem);
+
+            #{slide.$select} {
+                &__into {
+                    flex: 1 1 84rem;
+                    max-width: 84rem;
+                    position: relative;
+                }
+            }
+        }
+
+        @content;
+    }
+}

@@ -1,0 +1,24 @@
+@font-face {
+    font-family: ember;
+    src: url('/fonts/amazonember_lt-webfont.woff2') format('woff2'),
+         url('/fonts/amazonember_lt-webfont.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: ember;
+    src: url('/fonts/amazonember_rg-webfont.woff2') format('woff2'),
+         url('/fonts/amazonember_rg-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: ember;
+    src: url('/fonts/amazonember_bd-webfont.woff2') format('woff2'),
+         url('/fonts/amazonember_bd-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}

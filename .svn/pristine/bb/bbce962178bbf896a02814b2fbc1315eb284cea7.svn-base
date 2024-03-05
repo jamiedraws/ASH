@@ -1,0 +1,65 @@
+@use "../../shared/css/template/dtm/utils/arp";
+@use "../models/queries";
+
+$select: ".picture-carousel" !default;
+
+@mixin ui {
+    @media all and (max-width: 640px) {
+        @include arp.apply("#{$select}__item", 1/1);
+    }
+
+    @media all and (min-width: 640px) {
+        @include arp.apply("#{$select}__item", 1106/383);
+    }
+
+    #{$select} {
+        $breakpoint: 1280px;
+
+        position: relative;
+        margin-bottom: 1em;
+
+        &__in {
+            position: relative;
+
+            @media all and (max-width: $breakpoint) {
+                overflow: hidden;
+            }
+        }
+
+        &__into {
+            border: 1px solid #a6a6a6;
+        }
+
+        &__item {
+            background: #ededed;
+        }
+
+        @media all and (min-width: $breakpoint) {
+            &__nav > button {
+                position: relative;
+            }
+
+            &__prev {
+                left: -2em;
+            }
+
+            &__next {
+                right: -2em;
+            }
+        }
+
+        @media all and (max-width: $breakpoint) {
+            &__nav {
+                position: relative;
+            }
+
+            &__thumbnails {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 1em;
+                margin: auto;
+            }
+        }
+    }
+}

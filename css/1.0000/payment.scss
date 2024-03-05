@@ -1,0 +1,6 @@
+@use "../interfaces/ui-page";
+@use "../interfaces/ui-checkout";
+@use "../interfaces/ui-form";
+@use "../interfaces/ui-header" as header;
+
+@include header.nav;

@@ -1,0 +1,36 @@
+.header {
+  font-size: 1rem;
+}
+.header__group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header__logo {
+  display: flex;
+  align-items: center;
+  flex: 0 0 153px;
+}
+@media all and (max-width: 1200px) {
+  .header {
+    display: none;
+  }
+}
+
+.title {
+  font: 3.4em/1.1 amazon-ember, sans-serif;
+  text-align: center;
+  font-weight: 400;
+}
+.title > span {
+  display: block;
+}
+
+.logo__picture {
+  flex: 1;
+}
+.logo__picture[style^="--arp"]::after {
+  display: none;
+}
+
+/*# sourceMappingURL=header.css.map */

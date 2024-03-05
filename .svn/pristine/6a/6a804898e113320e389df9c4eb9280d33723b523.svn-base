@@ -1,0 +1,67 @@
+@use "../interfaces/dtm";
+
+@use "../layouts/queries";
+@use "../layouts/story-card";
+@use "../layouts/product";
+@use "../layouts/product-carousel";
+@use "../layouts/form";
+@use "../layouts/full-width-picture" as fwp with (
+    $breakpoint: queries.$hero
+);
+
+@use "../media/contain";
+
+@use "../components/button";
+
+@mixin collection {
+    @include story-card.image-caption;
+    @include fwp.new;
+    @include fwp.flip;
+    @include fwp.homepage;
+
+    #{contain.$select} {
+        &--photo-bar {
+            @media all and (min-width: 600px) {
+                @include contain.ratio(1200/550);
+            }
+
+            @media all and (max-width: 600px) {
+                @include contain.ratio(600/255);
+            }
+        }
+    }
+}
+
+@mixin grid {
+    @include product.grid;
+
+    @include story-card.new;
+    @include story-card.max-four;
+    @include story-card.image-link;
+    @include story-card.image-button;
+
+    @include item;
+}
+
+@mixin single {
+    @include product.single;
+    @include product-carousel.new;
+}
+
+@mixin item {
+    @include product.new;
+
+    // @include form.fieldset;
+    @include form.icon-field-combobox;
+    @include form.label-combobox;
+    @include form.select;
+
+    #{dtm.$select-dtm} {
+        #{product.$select} {
+            @include dtm.unset-icomoon;
+        }
+    }
+
+    @include story-card.form;
+    @include story-card.buttons;
+}

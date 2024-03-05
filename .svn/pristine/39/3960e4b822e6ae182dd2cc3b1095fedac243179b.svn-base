@@ -1,0 +1,22 @@
+@use "ui-page" as page;
+@use "ui-deal" as deal;
+@use "ui-form" as form;
+@use "../models/colors";
+
+.copy {
+    h2 {
+        margin: 0.5em 0;
+    }
+
+    h3 + p {
+        margin-top: 0.5em;
+    }
+
+    picture:first-child {
+        margin: auto auto 1em;
+    }
+
+    &:not(:last-child):not(.copy--single) {
+        padding-bottom: 2em;
+    }
+}

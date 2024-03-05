@@ -1,0 +1,9 @@
+@use "../interfaces/ui-page";
+@use "../interfaces/ui-header" as header;
+@use "../interfaces/ui-view" as view;
+
+@use "../components/banner";
+
+@include header.nav;
+@include banner.ui;
+@include banner.countdown;

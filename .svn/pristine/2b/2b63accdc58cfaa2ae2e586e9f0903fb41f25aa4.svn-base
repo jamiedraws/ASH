@@ -1,0 +1,124 @@
+@use "../../Shared/css/template/dtm/utils/scope";
+@use "../components/paypal-credit-banners" as paypal;
+@use "../models/colors";
+
+$-view: ".view";
+
+#{$-view} {
+    &--checkout {
+        #{$-view}__in {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        #{$-view}__title {
+            margin-bottom: 1em;
+        }
+    }
+
+    &__title {
+        color: colors.get(fifth);
+        font-size: 2.3em;
+        margin-bottom: 1em;
+    }
+
+    &__title,
+    &__copy,
+    &__abbr {
+        text-align: center;
+    }
+
+    &__abbr {
+        display: block;
+        padding: 1em 0;
+
+        > abbr {
+            color: #9c0d0d;
+            margin-right: 0.25em;
+        }
+    }
+
+    & &__actions {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        [id^="id_PayPal"],
+        .button {
+            margin: 1em;
+        }
+    }
+}
+
+.group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &__row {
+        flex: 1 1 100%;
+
+        &:not(:last-of-type):not(.group--form) {
+            margin-bottom: 1em;
+        }
+    }
+
+    &--form {
+        margin: 0;
+    }
+}
+
+.checkbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__item {
+        padding: 1rem;
+    }
+}
+
+@include scope.for-desktop {
+    .view {
+        &__anchor {
+            top: 0;
+        }
+    }
+}
+
+@include scope.for-mobile {
+    font-size: 1.4rem;
+}
+
+.nav {
+    position: relative;
+}
+
+@include scope.for-template {
+    $c-phase: ".c-phase";
+
+    #{$c-phase} {
+        & #{$c-phase}__group {
+            margin: 3em 0 0;
+        }
+    }
+
+    [data-edit-address-link] {
+        text-decoration: underline;
+    }
+}
+
+@include scope.for-template {
+    .l-outer {
+        max-width: none;
+
+        &__in {
+            max-width: 1130px;
+            margin: auto;
+            box-shadow: none;
+            border: none;
+        }
+    }
+}
+
+@include paypal.ui;

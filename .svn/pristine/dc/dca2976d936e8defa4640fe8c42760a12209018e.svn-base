@@ -1,0 +1,19 @@
+@use "../interfaces/ui-index";
+@use "../interfaces/ui-header" as header;
+@use "../interfaces/ui-offer-card" as card;
+@use "../interfaces/ui-picture-carousel" as picture-carousel;
+@use "../interfaces/ui-hero" as hero;
+@use "../interfaces/ui-addons" as addons;
+@use "../interfaces/ui-view" as view;
+
+@use "../components/banner";
+
+@include header.nav;
+@include picture-carousel.ui;
+@include hero.ui;
+@include addons.expand;
+@include card.ui;
+@include card.highlight;
+@include banner.ui;
+@include banner.countdown;
+@include view.navbar-banner;

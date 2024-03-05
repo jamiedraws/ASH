@@ -1,0 +1,61 @@
+@use "../components/toast";
+@use "../components/close";
+
+$select: ".product-details" !default;
+
+@mixin ui {
+    #{$select} {
+        &__close {
+            font-size: 0.5em;
+        }
+
+        &__article:not(#{$select}__article--is-visible) {
+            display: none;
+        }
+
+        ul {
+            column-width: 20em;
+        }
+    }
+}
+
+@mixin modal {
+    @include close.model(".modal");
+
+    .modal {
+        z-index: 1;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &__stage {
+            background: white;
+            box-shadow: 0 0 1em black;
+            padding: 1em;
+            flex: 1;
+        }
+
+        &__close {
+            float: right;
+        }
+    }
+
+    .product__modal {
+        // transform: translateY(100%);
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        bottom: 0;
+        top: auto;
+        margin: 0;
+
+        &--is-visible {
+            pointer-events: all;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}

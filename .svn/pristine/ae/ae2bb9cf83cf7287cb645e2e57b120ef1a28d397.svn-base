@@ -1,0 +1,81 @@
+$select: ".view" !default;
+$breakpoint: 1000px !default;
+
+@use "../utils/defer";
+
+@mixin new {
+	@include set-anchor-position();
+
+	#{$select} {
+		position: relative;
+
+		&__anchor {
+			position: absolute;
+		}
+
+		&__in {
+			position: relative;
+		}
+
+		&__scroll {
+			position: sticky;
+		}
+
+		@content;
+	}
+}
+
+@mixin set-anchor-position($static-amount: 6rem, $dynamic-amount: 6rem) {
+	#{$select} {
+		&__anchor {
+			top: -$static-amount;
+
+			@media all and (max-width: $breakpoint) {
+				top: -$dynamic-amount;
+			}
+		}
+
+		&__scroll {
+			top: $static-amount;
+
+			@media all and (max-width: $breakpoint) {
+				top: $dynamic-amount;
+			}
+		}
+	}
+
+	@include defer.set-offset($static-amount);
+
+	@media all and (max-width: $breakpoint) {
+		@include defer.set-offset($dynamic-amount);
+	}
+}
+
+@mixin zero-anchor-position($parent-select: $select) {
+	#{$parent-select} {
+		& > #{$select}__anchor {
+			top: 0;
+		}
+
+		@content;
+	}
+}
+
+@mixin set-position-context($parent-select: $select, $amount: 6rem) {
+	#{$parent-select} {
+		margin-top: -#{$amount};
+
+		#{$select} {
+			&__offset {
+				padding-top: $amount;
+			}
+
+			&__flow {
+				padding-top: $amount;
+				margin-bottom: -#{$amount};
+			}
+		}
+
+		@content;
+	}
+}

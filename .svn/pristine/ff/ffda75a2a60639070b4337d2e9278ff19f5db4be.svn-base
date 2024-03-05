@@ -1,0 +1,18 @@
+@use "../models/colors";
+
+@use "../interfaces/ui-page";
+@use "../interfaces/ui-header" as header;
+@use "../interfaces/ui-offer-card" as card;
+@use "../interfaces/ui-view" as view;
+
+@use "../components/banner";
+
+@include header.nav;
+@include header.reset-nav-list-transition();
+@include card.ui;
+@include card.highlight;
+@include banner.ui;
+
+.dtm--confirmation .responsive-img {
+    margin: 0 auto;
+}

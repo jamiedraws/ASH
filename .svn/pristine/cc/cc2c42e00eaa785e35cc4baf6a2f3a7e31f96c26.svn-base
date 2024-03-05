@@ -1,0 +1,27 @@
+@use "../models/colors";
+
+@use "../interfaces/ui-page";
+@use "../interfaces/ui-header" as header;
+@use "../interfaces/ui-offer-card" as card;
+@use "../interfaces/ui-view" as view;
+
+@use "../components/banner";
+
+@include header.nav;
+@include card.ui;
+@include card.highlight;
+
+@media all and (min-width: 600px) {
+    .offer-card__price .paypal-credit-text {
+        margin: 0 3em;
+    }
+}
+
+// removing this header from backend pages
+.c-phase__header {
+    display: none;
+}
+
+.dtm--confirmation .responsive-img {
+    margin: 0 auto;
+}

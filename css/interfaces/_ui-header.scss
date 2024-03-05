@@ -1,0 +1,364 @@
+@use "../../Shared/css/template/dtm/utils/scope";
+@use "../../Shared/css/template/dtm/utils/text";
+@use "../../Shared/css/template/dtm/utils/vendor-rules";
+@use "../../Shared/css/template/dtm/components/nav";
+@use "../models/colors";
+@use "../models/fonts";
+@use "../models/queries";
+
+@mixin model {
+    .header {
+        font-size: 1rem;
+
+        &__group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &__logo {
+            display: flex;
+            align-items: center;
+            flex: 0 0 153px;
+        }
+
+        @media all and (max-width: queries.get(nav)) {
+            display: none;
+        }
+    }
+
+    .title {
+        @include fonts.first(3.4em, 1.1) {
+            text-align: center;
+            font-weight: 400;
+            @include text.wrap;
+        }
+    }
+
+    .logo {
+        &__picture {
+            flex: 1;
+            &[style^="--arp"]::after {
+                display: none;
+            }
+        }
+    }
+}
+
+@mixin transition-opacity-transform(
+    $opacity: 0,
+    $translateX: 0,
+    $transition: true
+) {
+    opacity: $opacity;
+    transform: translateX($translateX);
+    @if ($transition) {
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    @content;
+}
+
+@mixin is-visible($translate: translateX(0), $opacity: 0) {
+    @include vendor-rules.keyframes(is-visible) {
+        0% {
+            visibility: visible;
+            transform: $translate;
+            opacity: $opacity;
+        }
+        100% {
+            transform: translate(0);
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
+
+@mixin is-hidden($translate: translateX(0), $opacity: 0) {
+    @include vendor-rules.keyframes(is-hidden) {
+        0% {
+            visibility: visible;
+            transform: translate(0);
+            opacity: 1;
+        }
+        99% {
+            transform: $translate;
+            opacity: $opacity;
+            visibility: visible;
+        }
+        100% {
+            visibility: hidden;
+        }
+    }
+}
+
+@mixin nav {
+    @include is-hidden;
+    @include is-visible;
+
+    @include nav.ui(
+        (
+            vw: queries.get(nav)
+        )
+    ) {
+        background: colors.get(_white);
+        box-shadow: 0 0 1.25em rgba(0, 0, 0, 0.35);
+        font-size: 1rem;
+        text-transform: uppercase;
+        position: sticky;
+        top: 0;
+        transition: transform 0.3s ease-in-out;
+
+        &--is-hidden {
+            @media all and (max-width: queries.get(mobile)) {
+                transform: translateY(-100%);
+            }
+        }
+
+        &__promo {
+            flex: 1 1 100%;
+        }
+
+        &__pane {
+            position: relative;
+            color: white;
+
+            &::before,
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                transition: opacity 0.3s ease-in-out;
+            }
+
+            &::before {
+                background: white;
+            }
+
+            &::after {
+            }
+        }
+
+        &--is-fixed &__pane {
+            color: inherit;
+        }
+
+        &__group {
+            flex-wrap: wrap;
+            justify-self: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        &__list,
+        &__title {
+            flex: 1 1 100%;
+        }
+
+        &__header {
+            flex: 1 1 100%;
+            padding: 2em 0;
+        }
+
+        &__title {
+            margin: auto;
+            align-items: center;
+
+            h1 {
+                @include fonts.first(4em, 1);
+                color: colors.get(second);
+                @include text.wrap;
+
+                strong {
+                    @include fonts.third(1em, 1);
+                }
+            }
+        }
+
+        &__list {
+            @include fonts.first(1.5em, 1);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            > a {
+                display: block;
+                padding: 0.25em;
+            }
+        }
+
+        &__logo {
+            flex: 0 1 auto;
+            padding: 0.5em;
+        }
+
+        @content;
+    }
+
+    @media all and (min-width: queries.get(nav)) {
+        .nav {
+            position: relative;
+            overflow: hidden;
+
+            &__list {
+                @include transition-opacity-transform(1, 10%);
+            }
+
+            & > &__logo,
+            &__title {
+                display: none;
+            }
+
+            &__logo,
+            &__deal {
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            &__logo,
+            .logo__picture {
+                width: 8.5em;
+            }
+
+            &__pane {
+                border-bottom: 0.15rem solid white;
+
+                &::after {
+                    background: colors.get(first);
+                }
+
+                a:focus {
+                    outline-color: colors.get(fifth);
+                }
+            }
+
+            &--is-primed {
+                .nav {
+                    &__logo,
+                    &__deal {
+                        @include vendor-rules.vendor-rule(
+                            animation,
+                            is-hidden 0.3s ease-in-out forwards
+                        );
+                    }
+                }
+            }
+
+            &--is-fixed {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                width: 100%;
+
+                @supports (position: sticky) {
+                    position: sticky;
+                }
+
+                a:focus {
+                    outline-color: colors.get(first);
+                }
+
+                .nav {
+                    &__list {
+                        @include transition-opacity-transform(1, 0, false);
+                    }
+
+                    &__pane {
+                        &::after {
+                            opacity: 0;
+                        }
+                    }
+
+                    &__link--order {
+                        display: none;
+                    }
+
+                    &__logo,
+                    &__deal {
+                        @include vendor-rules.vendor-rule(
+                            animation,
+                            is-visible 0.3s ease-in-out forwards
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    @media all and (max-width: queries.get(nav)) {
+        .nav {
+            background: colors.get(_white);
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            & &__logo {
+                flex: 0 1 10em;
+                margin-left: 1.25em;
+                padding-left: 0;
+            }
+
+            &__label {
+                font-size: 1.5em;
+                width: 2.5em;
+                margin-right: 1em;
+            }
+
+            &__pane {
+                background: colors.get(_white);
+                color: colors.get(first);
+
+                .nav {
+                    &__logo {
+                        margin: 1em;
+                    }
+
+                    &__title {
+                        padding: 0 0.5em 1em;
+                    }
+                }
+            }
+
+            & &__link {
+                padding: 1.5em 1em;
+                order: 1;
+            }
+
+            &__deal {
+                border: solid colors.get(first);
+                border-width: 1px 0;
+                background: colors.get(third);
+                flex: 1 1 100%;
+                padding: 1em;
+            }
+
+            &__title {
+                text-align: left;
+                text-transform: initial;
+                display: block;
+                font-size: 1.5em;
+            }
+
+            &__list {
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                border: none;
+            }
+        }
+    }
+}
+
+@mixin reset-nav-list-transition {
+    .nav {
+        &__list {
+            @include transition-opacity-transform(1, 0, false);
+        }
+    }
+}

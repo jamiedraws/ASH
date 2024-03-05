@@ -1,0 +1,27 @@
+$select: ".form-header-banner" !default;
+
+@use "../layouts/group";
+@use "../layouts/form";
+
+@mixin new {
+	#{$select} {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+
+		@include group.gutter(1rem);
+
+		h2 {
+			font-size: 2rem;
+			text-transform: uppercase;
+			text-align: center;
+		}
+
+		fieldset {
+			@include form.field-button(15rem, 15rem);
+		}
+
+		@content;
+	}
+}

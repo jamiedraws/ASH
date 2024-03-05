@@ -1,0 +1,7 @@
+@use "../interfaces/ui-page";
+@use "../interfaces/ui-header" as header;
+@use "../interfaces/ui-offer-card" as card;
+
+@include header.nav;
+@include card.ui;
+@include card.highlight;

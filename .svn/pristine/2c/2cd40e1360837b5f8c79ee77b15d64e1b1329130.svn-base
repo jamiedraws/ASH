@@ -1,0 +1,16 @@
+$select: ".banner" !default;
+
+@use "../themes/colors";
+
+@mixin new {
+	#{$select} {
+		padding: 1rem;
+
+		background: colors.$second;
+		color: white;
+		text-align: center;
+		text-transform: uppercase;
+
+		@content;
+	}
+}

@@ -1,0 +1,59 @@
+@use "../models/colors";
+
+$select: ".banner" !default;
+
+@mixin ui {
+	#{$select} {
+		display: block;
+		text-align: center;
+		padding: 0.5em;
+		margin: 0;
+		font-size: 1.6em;
+
+		@content;
+	}
+}
+
+@mixin countdown {
+	#{$select} {
+		&--countdown {
+			font-weight: bold;
+			background: #e00;
+
+			> small {
+				display: block;
+				margin-top: 0.5em;
+			}
+		}
+
+		@content;
+	}
+}
+
+@mixin oos {
+	#{$select} {
+		&--oos {
+			background: #ffd890;
+			color: colors.get(first);
+			text-transform: capitalize;
+		}
+
+		@content;
+	}
+}
+
+@mixin additionals {
+	#{$select} {
+		&--dark {
+			background: colors.get(first);
+		}
+		&--bold {
+			text-transform: uppercase;
+			font-weight: bold;
+			font-size: 2.4em;
+			margin: 0 0 0.5em;
+		}
+
+		@content;
+	}
+}

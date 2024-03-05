@@ -1,0 +1,49 @@
+@use "../models/queries";
+
+$select: ".hero" !default;
+
+@mixin ui {
+    #{$select} {
+        &__in {
+            padding: 2rem 1em;
+        }
+
+        &__title {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            padding-bottom: 2rem;
+        }
+
+        &__group {
+            justify-content: space-around;
+
+            > * {
+                flex: 0 1 550px;
+            }
+        }
+
+        &__products-burst {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        &__products {
+            flex: 0 1 425px;
+            font-size: 0.88rem;
+        }
+
+        @media all and (max-width: queries.get(mobile)) {
+            &__products {
+                font-size: 1.75vw;
+            }
+
+            &__burst {
+                order: 1;
+            }
+        }
+    }
+
+    @content;
+}

@@ -1,0 +1,7 @@
+@mixin init {
+    .toggle {
+        &--is-hidden {
+            display: none;
+        }
+    }
+}

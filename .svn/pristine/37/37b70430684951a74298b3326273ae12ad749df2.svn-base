@@ -1,0 +1,74 @@
+$select: ".link" !default;
+
+@mixin new {
+    #{$select} {
+        position: relative;
+
+        &__advisal {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            text-align: left;
+            transform: translateY(-100%);
+            min-width: 30vw;
+        }
+
+        &:hover > &__advisal,
+        &:focus > &__advisal {
+            opacity: 1;
+            transform: translateY(-120%);
+        }
+
+        &__container {
+            display: inline-block;
+            padding: 0.5em 0.75em;
+            background: black;
+            color: white;
+            border-radius: 0.5em;
+        }
+
+        @content;
+    }
+}
+
+@mixin inline {
+    #{$select} {
+        &--inline {
+            #{$select} {
+                &__advisal {
+                    transform: translateY(-50%);
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    margin: auto;
+                }
+            }
+
+            &:hover,
+            &:focus {
+                #{$select} {
+                    &__advisal {
+                        transform: translateY(-50%);
+                    }
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin hide {
+    #{$select} {
+        &__advisal {
+            min-width: none;
+            max-width: 0;
+            max-height: 0;
+            overflow: hidden;
+        }
+    }
+}

@@ -1,0 +1,4 @@
+@use "interfaces/ui-product-details" as product;
+
+@include product.ui;
+@include product.modal;

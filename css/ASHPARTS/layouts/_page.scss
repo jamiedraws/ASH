@@ -1,0 +1,10 @@
+$select: ".page" !default;
+$breakpoint: 1200px !default;
+
+@mixin new {
+	#{$select} {
+		// min-height: 50vh;
+
+		@content;
+	}
+}

@@ -1,0 +1,39 @@
+/**
+* @prettier
+*/
+
+$select: ".quote" !default;
+$breakpoint: 1200px !default;
+
+@use "../components/copy";
+@use "../themes/colors";
+
+@mixin new {
+	#{$select} {
+		text-align: center;
+		font-size: 2.4rem;
+
+		@media all and (max-width: $breakpoint) {
+			font-size: clamp(1.8rem, 5vw, 2.4rem);
+		}
+
+		@include copy.separate;
+
+		header {
+			text-transform: uppercase;
+		}
+
+		&__stars {
+			color: colors.$second;
+			max-width: 300px;
+			width: 100%;
+			max-height: 50px;
+		}
+
+		footer {
+			font-style: italic;
+		}
+
+		@content;
+	}
+}

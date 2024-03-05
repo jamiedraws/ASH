@@ -1,0 +1,464 @@
+@use "../../Shared/css/template/dtm/utils/scope";
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../../Shared/css/template/dtm/components/button";
+@use "../models/colors";
+@use "../models/fonts";
+@use "../models/queries";
+@use "ui-header" as header;
+
+$nav-offset: 55px;
+
+$-form-border-color: #bdbdbd;
+
+@mixin form-legend {
+    background: colors.get(third);
+    color: colors.get(second);
+    padding: 1.25rem;
+}
+
+@mixin form-fieldset {
+    background: white;
+    border: 1px solid $-form-border-color;
+}
+
+@mixin form-headline {
+    @include fonts.first(2rem) {
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+}
+
+.form-title {
+    text-align: center;
+    padding: 2em 0;
+    color: colors.get(second);
+
+    &__not-available {
+        @include fonts.first(3.2em);
+        font-weight: bold;
+        display: block;
+        margin-bottom: 0.15em;
+    }
+
+    &__fill-out {
+        @include fonts.second(1.4em) {
+            font-weight: 400;
+        }
+    }
+}
+
+@include scope.for-mobile {
+    .form-title {
+        &__not-available {
+            font-size: 8vmin;
+        }
+
+        &__fill-out {
+            font-size: 5vmin;
+        }
+    }
+}
+
+#dtm {
+    .c-brand--table {
+        th,
+        &__th {
+            background: colors.get(first);
+            color: white;
+        }
+    }
+}
+
+@include scope.for-mobile {
+    @media all and (max-width: 47.5em), (max-device-width: 64em) and (min-device-width: 48em) {
+        .c-brand--table {
+            tbody td {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding-left: 1rem;
+
+                &:first-of-type {
+                    background: #5a5a5a;
+                }
+
+                &::before {
+                    position: relative;
+                    max-height: none;
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+        }
+    }
+}
+
+@include arp.defer(
+    (
+        select: ".view--form",
+    )
+) {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    font-size: 6rem;
+    top: 2em;
+    margin: auto;
+    animation-play-state: running;
+}
+
+.c-brand--form {
+    visibility: hidden;
+
+    &__legend {
+        @include form-legend;
+    }
+
+    &__fieldset {
+        @include form-fieldset;
+    }
+
+    .button {
+        font-size: 2rem;
+    }
+
+    &__submission {
+        justify-content: center;
+    }
+}
+
+@include scope.for-template {
+    .c-brand--form {
+        &__item {
+            display: flex;
+            flex-wrap: wrap;
+
+            &:not(:last-child) {
+                margin-bottom: 0.5rem;
+            }
+
+            > * {
+                display: flex;
+                flex: 1;
+            }
+        }
+
+        &__headline {
+            @include form-headline;
+        }
+
+        .checkout-option {
+            padding-left: 0;
+            text-align: left;
+            flex: 1 1 100%;
+            overflow: visible;
+
+            &:last-child {
+                border-bottom: 0;
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+
+            &#divCARD img {
+                margin: 1.5rem 2px;
+            }
+
+            &__img {
+                margin-right: 1rem;
+            }
+        }
+
+        #CardNumberCt {
+            padding-top: 2rem;
+            margin-top: 1rem;
+            border-top: 1px solid #ccc;
+        }
+
+        #paypal-button {
+            margin: 0;
+        }
+    }
+}
+
+@include scope.for-desktop {
+    .c-brand--form {
+        &__label,
+        &__cc--label {
+            flex: 0 0 8.5em;
+            text-align: right;
+            justify-content: flex-end;
+        }
+    }
+}
+
+@include scope.for-mobile {
+    .c-brand--form {
+        &__legend {
+            padding: 1rem 2rem;
+        }
+
+        &__item {
+            flex-direction: column;
+        }
+
+        &__headline {
+            font-size: 1.8rem;
+        }
+
+        .l-disclaimer {
+            width: auto;
+        }
+
+        .zc {
+            width: 100%;
+        }
+    }
+
+    .view--form {
+        overflow: hidden;
+
+        [class*="c-brand"] {
+            font-size: 1.65rem;
+
+            p {
+                font-size: inherit;
+            }
+        }
+
+        &::after {
+            font-size: 10vmin;
+            top: 35vmin;
+        }
+    }
+}
+
+.form {
+    position: relative;
+
+    &__vse {
+        margin-bottom: 2em;
+    }
+
+    &__checkbox {
+        margin: 2em auto 0;
+        display: table;
+    }
+
+    &--is-ready {
+        .c-brand--form {
+            visibility: visible;
+            opacity: 0;
+            animation: fade-in 0.3s ease-in-out forwards;
+        }
+    }
+
+    &__bg {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        img {
+            margin: auto;
+        }
+    }
+
+    &__item {
+        flex: 1 1 480px;
+        margin-bottom: 2.5rem;
+    }
+
+    &__scroll {
+        position: sticky;
+        top: $nav-offset;
+    }
+
+    &__legend {
+        font-size: 2em;
+        margin-bottom: 1em;
+        display: flex;
+        justify-content: flex-start;
+        text-align: left;
+    }
+
+    &__group {
+        display: flex;
+        flex: 1;
+
+        > * {
+            flex: 1;
+        }
+    }
+
+    fieldset:not(:last-of-type) {
+        margin-bottom: 2rem;
+    }
+
+    &__field {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        flex: 1;
+
+        > input,
+        > select,
+        > .fld {
+            flex: 1;
+        }
+    }
+
+    &__label {
+        text-align: right;
+    }
+
+    &__list {
+        margin: 0;
+    }
+
+    &__copy {
+        flex: 0 1 30em;
+    }
+
+    &__upsell-image {
+        flex: 0 1 320px;
+    }
+
+    &__upsell-image + &__upsell-text {
+        flex: 0 1 35em;
+    }
+}
+
+@include scope.for-template {
+    .form {
+        &__field {
+            &--block {
+                > label {
+                    flex: 1 1 100%;
+                    text-align: left;
+                }
+            }
+        }
+
+        &__upsell-text {
+            font-size: 1.6rem;
+            line-height: 1.45;
+            display: flex;
+            flex-direction: column;
+
+            p,
+            ul {
+                font-size: inherit;
+            }
+        }
+    }
+}
+
+@include scope.for-desktop {
+    .form {
+        &__item {
+            margin: 1em;
+        }
+
+        &__field {
+            &--block {
+                &:not(:first-child):not(:last-child) {
+                    margin: 0 2rem;
+                }
+            }
+        }
+
+        &__upsell-bar {
+            display: flex;
+            flex: 1 1 auto;
+        }
+
+        &__upsell-image,
+        &__upsell-text {
+            margin: 1em 2em;
+        }
+
+        &__legend {
+            &::before {
+                content: "";
+                flex: 0 0 4.2em;
+                text-align: right;
+                justify-content: flex-end;
+            }
+        }
+
+        &__payment {
+            .form {
+                &__legend {
+                    &::before {
+                        flex: 0 0 1em;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include scope.for-mobile {
+    .form {
+        &__field {
+            > label {
+                flex: 1 1 100%;
+                text-align: left;
+            }
+
+            &--block {
+                flex: 1 1 100%;
+            }
+        }
+
+        &__upsell-bar {
+            flex: 1;
+            display: flex;
+            order: 1;
+        }
+
+        &__item {
+            flex: 1 1 100%;
+        }
+
+        &__review {
+            order: -1;
+        }
+
+        &__upsell-image,
+        &__upsell-text {
+            margin: 1em 0;
+        }
+    }
+}
+
+.element {
+    &--is-fixed {
+        position: fixed;
+        top: 0;
+    }
+
+    &--is-absolute {
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+#reviewOrder {
+    &.element {
+        &--is-fixed,
+        &--is-absolute {
+            width: 507px;
+        }
+
+        &--is-fixed {
+            top: 55px;
+        }
+
+        &--is-absolute {
+            bottom: 25px;
+        }
+    }
+}

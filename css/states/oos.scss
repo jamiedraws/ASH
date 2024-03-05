@@ -1,0 +1,68 @@
+@use "../interfaces/ui-header" as header;
+@use "../interfaces/ui-view" as view;
+
+@use "../components/banner";
+
+@use "../models/queries";
+@use "../models/colors";
+
+@mixin hide-order-links {
+	[href="#order"] {
+		display: none !important;
+	}
+}
+
+@include banner.oos;
+@include view.navbar-oos-banner;
+@include hide-order-links;
+@include header.reset-nav-list-transition;
+
+@keyframes is-oos {
+	to {
+		opacity: 1;
+		transform: scale(1) rotate(-0.45rad);
+	}
+}
+
+.oos {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	background: colors.get(second);
+	color: colors.get(first);
+	border: 2px solid currentColor;
+	padding: 0.25em;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+	width: 13em;
+	height: 1.5em;
+	z-index: 1;
+	transform-origin: center center;
+	transform: scale(1.5) rotate(-0.45rad);
+	opacity: 0;
+	animation: is-oos 0.3s cubic-bezier(0, 1.05, 0.58, 1) 0.5s forwards;
+
+	font-size: 2em;
+
+	@media all and (max-width: queries.get(desktop)) {
+		font-size: 3vw;
+		top: -2em;
+	}
+
+	@media all and (max-width: queries.get(tablet)) {
+		font-size: 4vw;
+	}
+
+	@media all and (max-width: queries.get(mobile)) {
+		font-size: 5vw;
+	}
+
+	@media all and (min-width: 0) {
+		font-size: clamp(0.25em, 6vw, 2em);
+	}
+}

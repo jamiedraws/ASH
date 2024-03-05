@@ -1,0 +1,132 @@
+@use "../models/fonts";
+@use "../models/colors";
+@use "../models/queries";
+
+$select: ".addons" !default;
+
+@mixin ui {
+    #{$select} {
+        @include fonts.second(1.15em, 1.1) {
+            text-transform: capitalize;
+        }
+        background: white;
+        box-shadow: 0 0 1em colors.get(first);
+        display: flex;
+        align-items: center;
+
+        &__in {
+            flex: 1;
+            padding: 0.5em;
+        }
+
+        &__title {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 1.25em;
+            line-height: inherit;
+            padding-left: 0.25em;
+
+            &:not(:first-child) {
+                border-top: 0.1em solid currentColor;
+                margin-top: 0.5em;
+                padding-top: 0.5em;
+            }
+        }
+
+        h2 {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        &__group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            margin: -1em 0 0 1.25em;
+
+            picture {
+                margin: 1em auto 0 1em;
+            }
+        }
+
+        ul {
+            margin: 0.5em 0.5em 0 1.25em;
+            line-height: 1.3;
+            column-width: 12em;
+            column-gap: 2em;
+
+            strong {
+                display: block;
+            }
+        }
+
+        & &__list--single {
+            column-count: 1;
+            column-width: auto;
+        }
+
+        li {
+            display: list-item;
+            break-inside: avoid;
+        }
+
+        & &__button {
+            font-size: 1em;
+        }
+    }
+}
+
+@mixin expand {
+    #{$select} {
+        &--expand {
+            box-shadow: none;
+
+            h2 {
+                border-bottom: 0.1em solid currentColor;
+                padding-bottom: 0.5em;
+                margin: 0;
+            }
+
+            #{$select} {
+                &__in {
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    > h2 {
+                        flex: 1 1 100%;
+                    }
+                }
+
+                &__item {
+                    font-size: 1.55rem;
+                    flex: 1 1 240px;
+                    margin-top: 1em;
+                }
+
+                &__group {
+                    margin: 0;
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                    text-align: left;
+
+                    > span {
+                        margin-right: auto;
+                    }
+
+                    > picture {
+                        margin: -2em 0 0 0.25em;
+                        max-width: 73px;
+                    }
+                }
+
+                &__button {
+                    display: block;
+                    margin-top: 1em;
+                }
+            }
+        }
+    }
+}

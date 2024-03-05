@@ -1,0 +1,47 @@
+$select: ".hero" !default;
+$breakpoint: 1200px !default;
+
+@use "group";
+@use "../media/contain";
+
+@mixin new {
+    #{$select} {
+        text-align: center;
+        background: #867e68;
+        color: white;
+
+        &__group {
+            @include group.container;
+            align-items: center;
+
+            > * {
+                flex: 1 1 400px;
+            }
+        }
+
+        picture {
+        }
+
+        h1 {
+            font-size: 3.4rem;
+            max-width: 50rem;
+            margin: auto;
+        }
+
+        &__content {
+            margin: 2rem;
+
+            > * + * {
+                margin-top: 3rem;
+            }
+        }
+
+        @content;
+    }
+
+    #{contain.$select} {
+        &--hero {
+            @include contain.ratio(680/387);
+        }
+    }
+}

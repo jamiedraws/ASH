@@ -1,0 +1,506 @@
+@use "../../Shared/css/template/dtm/utils/scope";
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../../Shared/css/template/dtm/components/button";
+@use "../../Shared/css/template/dtm/components/sr";
+@use "../components/toast";
+@use "../components/close";
+@use "../components/paypal-credit-banners" as paypal;
+@use "../models/colors";
+@use "../models/fonts";
+@use "../models/queries";
+@use "../interfaces/ui-view" as view;
+@use "../interfaces/ui-review" as review;
+@use "../interfaces/ui-deal" as deal;
+
+$min-layout: 1280px !default;
+$max-layout: 1120px !default;
+$max-nav-layout: 1130px !default;
+
+@include fonts.init;
+
+@include sr.new;
+
+html {
+    scroll-behavior: smooth;
+    background: colors.get(first);
+}
+
+body {
+    @supports (display: flex) {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+:focus,
+a:focus,
+button:focus,
+label:focus {
+    outline: 2px solid colors.get(first);
+}
+
+main:not(.hero) {
+    min-height: 100vh;
+}
+
+@include scope.for-template {
+    background: white;
+    color: colors.get(first);
+
+    @include fonts.first(18px, 1.4) {
+        font-weight: 400;
+
+        @media all and (max-width: 500px) {
+            font-size: 16px;
+        }
+    }
+}
+
+p {
+    line-height: 1.45;
+    margin: 1em 0;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+h2 {
+    @include fonts.first(2.5em, 1);
+    color: colors.get(first);
+}
+
+h3 {
+    @include fonts.first(2.8em, 1);
+    color: colors.get(first);
+}
+
+ul,
+ol {
+    margin-left: 1.5em;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    width: auto;
+}
+
+iframe,
+picture {
+    display: block;
+}
+
+figure {
+    margin: 0;
+}
+
+@include arp.init;
+@include arp.defer;
+
+@include scope.for-desktop {
+    .nav {
+        &__list {
+            max-width: #{$max-nav-layout};
+            margin: auto;
+        }
+    }
+}
+
+@include view.ui {
+    &__in {
+        max-width: queries.get(desktop);
+    }
+}
+
+@include scope.for-landscape {
+    .nav {
+        position: relative;
+    }
+
+    .view {
+        &__anchor {
+            top: 0;
+        }
+    }
+}
+
+@include scope.for-template {
+    @include button.model {
+        $color: orange;
+
+        & {
+            border-radius: 0;
+            border: 0.1em solid $color;
+            background: $color;
+            box-shadow: none;
+            padding: 0.5em 0.75em;
+            overflow: hidden;
+            @include fonts.first(1.6em, 0.9) {
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+        }
+
+        &:focus {
+            outline-color: colors.get(fifth);
+        }
+
+        &::before {
+            background: $color;
+        }
+
+        &::after {
+            background: white;
+            transform: skew(45deg) scaleX(0);
+            transform-origin: left bottom;
+            transition: transform 0.4s ease-out;
+            opacity: 1;
+        }
+
+        &--contrast {
+            color: colors.get(first);
+            border-color: colors.get(first);
+            background: white;
+
+            &::before {
+                background: white;
+            }
+
+            &::after {
+                background: colors.get(first);
+            }
+        }
+
+        &--accent {
+            $color: #d67500;
+            border-color: $color;
+            background: $color;
+
+            &::before {
+                background: $color;
+            }
+        }
+
+        &:hover,
+        &:focus,
+        &--is-selected {
+            text-decoration: none;
+            color: $color;
+            border-color: $color;
+        }
+
+        &:hover,
+        &:focus,
+        &--is-selected {
+            &::after {
+                transform: skew(45deg) scaleX(2);
+            }
+        }
+
+        &--contrast:hover,
+        &--contrast:focus,
+        &--contrast.button--is-selected {
+            color: white;
+        }
+    }
+}
+
+.copy {
+    position: relative;
+    z-index: 1;
+
+    h2 {
+        margin: 0 0 0.5em;
+    }
+
+    p ~ h3 {
+        margin-top: 2em;
+    }
+
+    picture + h3 {
+        margin-top: 0.75em;
+    }
+
+    .banner {
+        font-size: 1.35em;
+        margin-top: 0;
+    }
+
+    h3 {
+        @include fonts.first(1.75em, 1.3);
+        text-transform: unset;
+    }
+
+    &__cards {
+        display: block;
+        margin: 0;
+    }
+
+    .button {
+        font-size: 3rem;
+
+        @media all and (max-width: queries.get(mobile)) {
+            font-size: 1.25em;
+            display: block;
+        }
+    }
+}
+
+.offer {
+    display: inline-block;
+    @include fonts.first(1em, 1);
+    font-weight: bold;
+    position: relative;
+
+    &__txt {
+        text-transform: capitalize;
+        font-size: 1.8em;
+    }
+
+    &__price {
+        font-weight: 600;
+        font-size: 4em;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        margin-top: -0.15em;
+    }
+
+    &__disclaimer {
+        line-height: 1;
+        text-align: left;
+        display: block;
+        font-size: 0.35em;
+    }
+
+    &__follow {
+        text-align: left;
+        position: relative;
+        top: 0.2em;
+        left: 0.1em;
+    }
+
+    &__amt {
+        font-size: 2em;
+    }
+
+    &__currency,
+    &__cent {
+        font-size: inherit;
+    }
+
+    &__currency {
+        line-height: 1.4;
+    }
+
+    &__cent {
+        line-height: 1;
+        text-transform: none;
+    }
+
+    &__strike-through {
+        display: inline-block;
+        position: absolute;
+        top: -0.5em;
+        left: -0.5em;
+        color: #a6a6a6;
+        font-size: 1.5em;
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 0.075em;
+            background: #333;
+            top: 0;
+            bottom: 0;
+            left: -50%;
+            right: 0;
+            transform-origin: center center;
+            transform: rotate(-30deg);
+            margin: auto;
+        }
+    }
+}
+
+@include scope.for-template {
+    .fancybox-slide {
+        h1 {
+            font-size: 1.5em;
+        }
+
+        #policyContent,
+        .policy-body {
+            max-width: 1100px;
+        }
+    }
+}
+
+@include close.model(".toast");
+
+.toast {
+    @include toast.model;
+
+    &--hidden {
+        @include toast.hidden;
+
+        .toast__close {
+            &::before {
+                transition-delay: 0.35s;
+            }
+
+            &::after {
+                transition-delay: 0.7s;
+            }
+        }
+    }
+
+    &--alert {
+        position: fixed;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition-delay: 1s;
+    }
+
+    &__text {
+        margin-right: 1em;
+    }
+
+    &__close {
+        font-size: 0.45em;
+
+        &::before {
+            transition-delay: 1.35s;
+        }
+
+        &::after {
+            transition-delay: 1.7s;
+        }
+    }
+}
+
+.footer {
+    text-align: center;
+
+    &__disclaimer {
+        margin: 2em auto;
+        border: 1px solid currentColor;
+        padding: 2em;
+        text-align: left;
+
+        p {
+            margin: 0;
+        }
+
+        p:not(:first-of-type) {
+            margin-top: 1em;
+            margin-bottom: 0;
+        }
+
+        form {
+            display: none;
+        }
+
+        .button {
+            margin-top: 1em;
+        }
+    }
+}
+
+::selection {
+    background: colors.get(first);
+    color: white;
+}
+
+@include scope.for-template(".footer") {
+    .c-list {
+        & + p {
+            border-top: 1px solid;
+            padding-top: 2em;
+        }
+
+        &--nav {
+            display: block;
+        }
+    }
+}
+
+@include scope.for-mobile(".footer") {
+    .c-list {
+        &--nav {
+            background: white;
+            color: black;
+            border-radius: 0.25em;
+            overflow: hidden;
+            padding: 0;
+            text-align: left;
+        }
+
+        &__item {
+            padding: 0;
+            border-bottom: 1px solid;
+            border-right: none;
+            border-color: #ccc;
+        }
+
+        &__link {
+            flex: 1;
+            padding: 1em;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.3s ease-in-out;
+            text-decoration: none;
+
+            &::after {
+                content: "\e919";
+                font-family: "Icomoon";
+                display: block;
+            }
+
+            &:hover,
+            &:focus {
+                background: #ededed;
+            }
+        }
+    }
+}
+
+@include review.ui;
+
+@include deal.ui;
+
+.call-to-order {
+    small {
+        display: block;
+        font-style: italic;
+    }
+}
+
+@include paypal.onsite-message {
+    .nav + #{paypal.$select},
+    #{paypal.$select} + .button {
+        margin-top: 1em;
+    }
+
+    .offer-card__banner + #{paypal.$select} {
+        padding-top: 1em;
+    }
+
+    .form__legend + #{paypal.$select} {
+        margin-bottom: 1em;
+
+        #{paypal.$select}__message {
+            text-align: left;
+        }
+    }
+} ;

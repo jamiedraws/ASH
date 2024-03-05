@@ -1,0 +1,99 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage<ClientSiteViewData>" %>
+<%@ Import Namespace="Dtm.Framework.ClientSites" %>
+
+<%
+    var enableMerge = Dtm.Framework.ClientSites.SettingsManager.ContextSettings["Shared.MergeTemplate", false];
+    var mode = enableMerge ? "" : "_DTM";
+
+    var page = "Confirmation_Layout_Head";
+    var file = page + mode;
+
+    var isPaymentPage = DtmContext.PageCode == "PaymentForm" || DtmContext.PageCode == "ProcessPayment";
+    var viewClasses = "view l-outer";
+
+    if (isPaymentPage)
+    {
+		viewClasses = String.Format("{0} view--form form", viewClasses);
+    }
+%>
+
+<!DOCTYPE html>
+<html id="<%= enableMerge ? "dtm_upgrade" : "dtm" %>" class="dtm dtm--<%= DtmContext.PageCode.ToLower() %> dtm--<%= DtmContext.Page.PageType.ToLower() %> <%= DtmContext.Page.IsStartPageType ? "@f" : "@b" %> <%= Model.IsMobile ? "@mv" : "@dv" %>" lang="en-us">
+
+	<head>
+
+		<% if ( ViewEngines.Engines.FindPartialView(ViewContext.Controller.ControllerContext, file).View != null ) { %>
+			<%= Html.Partial(file, Model) %>
+		<% } else { %>
+			<!-- MISSING FILE: <%= file %> -->
+		<% } %>
+
+        <%
+            if (string.Equals(DtmContext.PageCode, "PaymentForm"))
+            {
+        %>
+                <meta name="robots" content="noindex, nofollow">
+        <%
+            }
+            %>
+
+		<asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+
+	</head>
+
+	<body class="dtm__in <%= Model.IsMobile ? "dtm__in--mv" : "dtm__in--dv" %>">
+
+		<%
+			page = "Confirmation_Layout_Body_Top";
+			file = page + mode;
+		%>
+
+		<% if ( ViewEngines.Engines.FindPartialView(ViewContext.Controller.ControllerContext, file).View != null ) { %>
+			<%= Html.Partial(file, Model) %>
+		<% } else { %>
+			<!-- MISSING FILE: <%= file %> -->
+		<% } %>
+
+		<main aria-label="Review order and checkout">
+            <div class="<%= viewClasses %>">
+			<div id="main" class="view__anchor"></div>
+			<div class="view__in l-outer__in c-brand--form">
+				<asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+				<%
+                    var digitalRiverCompanyName = SettingsManager.ContextSettings["DigitalRiver.CompanyName", "Digital River globalTech, Inc."];
+					var digitalRiverCompanyDisclaimer = SettingsManager.ContextSettings["DigitalRiver.CompanyDisclaimer", string.Empty];
+					var digitalRiverPrivacyPolicy = SettingsManager.ContextSettings["DigitalRiver.PrivacyPolicy--Links--", "https://store.digitalriver.com/DRHM/store?Action=DisplayDRPrivacyPolicyPage&SiteID=defaults&Locale=en_US&ThemeID=22100&eCommerceProvider=DR%20globalTech%20Inc."];
+					var digitalRiverTermsOfSale = SettingsManager.ContextSettings["DigitalRiver.TermsOfSale--Links--", "https://store.digitalriver.com/DRHM/store?Action=DisplayDRTermsAndConditionsPage&SiteID=defaults&Locale=en_US&ThemeID=22100&eCommerceProvider=DR%20globalTech%20Inc."];
+				%>
+				<nav aria-label="<%= digitalRiverCompanyName %> terms and policies" class="view">
+					<div class="view__in">
+						<%= digitalRiverCompanyDisclaimer %>
+						<ul class="c-list c-list--nav u-pad--vert">
+							<li class="c-list__item o-grid--iblock u-pad--right">
+								<a class="c-list__link" id="nav-digital-river-privacy-policy" target="_blank" rel="noreferrer noopener" id="digital-river-privacy-policy" href="<%= digitalRiverPrivacyPolicy %>">Privacy Policy</a>
+							</li>
+							<li class="c-list__item c-list__item--last o-grid--iblock">
+								<a class="c-list__link" id="nav-digital-river-terms-of-sale" target="_blank" rel="noreferrer noopener" id="digital-river-terms-of-sale" href=<%= digitalRiverTermsOfSale %>">Terms of Sale</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+            </div>
+		</main>
+            
+
+		<%
+			page = "Confirmation_Layout_Body_Bottom";
+			file = page + mode;
+		%>
+
+		<% if ( ViewEngines.Engines.FindPartialView(ViewContext.Controller.ControllerContext, file).View != null ) { %>
+			<%= Html.Partial(file, Model) %>
+		<% } else { %>
+			<!-- MISSING FILE: <%= file %> -->
+		<% } %>
+
+	</body>
+
+</html>

@@ -1,0 +1,137 @@
+@use "../models/colors";
+
+@mixin index {
+    .copy {
+        h2 {
+            text-align: center;
+        }
+    
+        h3 + p {
+            margin: 0.5em 1em;
+        }
+    
+        &:not(:last-child) {
+            padding-bottom: 2em;
+        }
+    
+        ul {
+            text-align: left;
+            column-width: 17em;
+        }
+    
+        li {
+            list-style: none;
+            display: inline-block;
+    
+            &::before {
+                content: "\2022";
+                margin-left: -1em;
+                width: 1em;
+                display: inline-block;
+            }
+        }
+    
+        &__list li::before {
+            color: colors.get(third);
+        }
+    
+        li li {
+            display: block;
+    
+            &::before {
+                color: currentColor;
+                font-size: 70%;
+            }
+        }
+    
+        &--standout {
+            h2 {
+                text-align: center;
+            }
+        }
+    
+        &__footer {
+            margin-top: 2em;
+            text-align: center;
+    
+            > small {
+                display: block;
+                margin-top: 3em;
+            }
+        }
+    
+        &__disclaimer {
+            text-align: center;
+            display: block;
+        }
+    
+        &__figure {
+            font-size: 1.1em;
+            font-weight: 500;
+            overflow: hidden;
+        }
+    
+        figcaption {
+            text-align: center;
+            font-weight: bold;
+            margin: 1em;
+        }
+    
+        &--title {
+            h2 {
+                margin: 0.5em;
+            }
+        }
+    
+        &--display &__group {
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+    
+        &--carousels &__figure {
+            flex: 0 1 540px;
+            margin: auto;
+        }
+    
+        &--carousels {
+            .carousel {
+                margin: 0;
+                overflow: hidden;
+            }
+        }
+    
+        &--images &__figure {
+            flex: 0 1 360px;
+            margin: 0 auto;
+        }
+    
+        &__image {
+            border: 1px solid black;
+        }
+    
+        &__group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+    
+        &__item {
+            flex: 1 1 20em;
+            margin: 2em 1em;
+        }
+    
+        &--display {
+            padding: 0 1em 4em;
+            box-sizing: content-box;
+    
+            h2 {
+                margin: 0;
+                padding: 1em 0;
+            }
+        }
+    
+        &__header {
+            border-top: 1px solid currentColor;
+        }
+    }
+}

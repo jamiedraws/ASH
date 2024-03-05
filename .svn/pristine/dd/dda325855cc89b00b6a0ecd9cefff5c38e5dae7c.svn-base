@@ -1,0 +1,46 @@
+$first: proxima-nova;
+$second: helvetica-neue;
+
+@mixin request {
+    @font-face {
+        font-family: $first;
+        font-weight: normal;
+        font-display: fallback;
+        src: url(/fonts/amazonember_rg-webfont.woff2) format("woff2"),
+            url(/fonts/amazonember_rg-webfont.woff) format("woff");
+    }
+
+    @font-face {
+        font-family: $first;
+        font-weight: bold;
+        font-display: fallback;
+        src: url(/fonts/amazonember_bd-webfont.woff2) format("woff2"),
+            url(/fonts/amazonember_bd-webfont.woff) format("woff");
+    }
+
+    @font-face {
+        font-family: $first;
+        font-weight: 400;
+        font-display: fallback;
+        src: url(/fonts/amazonember_lt-webfont.woff2) format("woff2"),
+            url(/fonts/amazonember_lt-webfont.woff) format("woff");
+    }
+
+    @font-face {
+        font-family: $second;
+        font-weight: normal;
+        font-display: fallback;
+        src: url(/shared/webfonts/helvetica-neue/55-roman/HelveticaNeue-Roman.woff)
+            format("woff");
+    }
+
+    @font-face {
+        font-family: $second;
+        font-weight: bold;
+        font-display: fallback;
+        src: url(/shared/webfonts/helvetica-neue/bold/HelveticaNeue-Bold.woff2)
+                format("woff2"),
+            url(/shared/webfonts/helvetica-neue/bold/HelveticaNeue-Bold.woff)
+                format("woff");
+    }
+}

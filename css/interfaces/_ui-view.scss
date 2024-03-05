@@ -1,0 +1,143 @@
+@use "../models/colors";
+@use "../models/fonts";
+@use "../models/queries";
+
+@mixin ui {
+	.view {
+		&:not(.nav) {
+			position: relative;
+			z-index: 1;
+		}
+
+		background: white;
+
+		&__anchor {
+			position: absolute;
+
+			top: -6rem;
+
+			@media all and (max-width: queries.get(nav)) {
+				top: -5.2rem;
+			}
+		}
+
+		&__in {
+			margin: auto;
+			padding: 2em 1em;
+		}
+
+		&--header {
+			z-index: 2;
+		}
+
+		&--header &__in {
+			padding: 2em 1em;
+		}
+
+		&--content &__in {
+			box-sizing: content-box;
+		}
+
+		&--grid &__in {
+			padding: 2em 0;
+		}
+
+		&--footer {
+			flex: 1 1 auto;
+			@include fonts.second(1.4rem, 1.45);
+			text-align: center;
+			color: colors.get(_white);
+			background: colors.get(first);
+			z-index: 1;
+
+			a:focus {
+				outline-color: colors.get(fifth);
+			}
+		}
+
+		&--photo {
+			background: #252525;
+
+			> picture {
+				max-width: 1500px;
+				margin: auto;
+			}
+		}
+
+		&--reviews {
+			background: #eaf0f0;
+
+			> picture::after {
+				display: none;
+			}
+		}
+
+		&__bg {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+
+		&__bg,
+		&--photo {
+			.load-item__success {
+				opacity: 0;
+				animation: fade-in 0.3s ease-in-out forwards;
+			}
+		}
+
+		&--bg-dark {
+			background: colors.get(first);
+			* {
+				color: white;
+			}
+		}
+
+		@content;
+	}
+}
+
+@mixin navbar-banner {
+	.view {
+		&__anchor {
+			top: -10.3rem;
+
+			@media all and (max-width: 611px) {
+				top: -11.9rem;
+			}
+
+			@media all and (max-width: 325px) {
+				top: -13.5rem;
+			}
+		}
+	}
+}
+
+@mixin navbar-oos-banner {
+	.view {
+		&__anchor {
+			top: -9.4rem;
+
+			@media all and (max-width: 1080px) {
+				top: -10rem;
+			}
+
+			@media all and (max-width: 560px) {
+				top: -11.6rem;
+			}
+
+			@media all and (max-width: 365px) {
+				top: -13.2rem;
+			}
+		}
+	}
+}

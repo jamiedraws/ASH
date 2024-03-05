@@ -1,0 +1,56 @@
+@use "../../shared/css/template/dtm/utils/arp";
+
+@use "../interfaces/ui-index";
+@use "../interfaces/ui-header" as header;
+@use "../interfaces/ui-offer-card" as card;
+@use "../interfaces/ui-picture-carousel" as picture-carousel;
+@use "../interfaces/ui-hero" as hero;
+@use "../interfaces/ui-addons" as addons;
+@use "../interfaces/ui-view" as view;
+
+@use "../components/banner";
+
+@include header.nav;
+@include picture-carousel.ui;
+@include hero.ui;
+@include addons.expand;
+@include card.ui;
+@include card.highlight;
+@include banner.ui;
+@include banner.additionals;
+
+// make sure the deals fill in the space
+.hero .deal__group {
+    align-items: stretch;
+}
+
+.offer__amt {
+    font-size: 1.7em;
+}
+
+.hero .offer__txt:first-letter {
+    font-size: 3.75em;
+}
+
+// new home diagram section
+
+@include arp.apply(".home-diagram", 640/1224);
+
+@media all and (min-width: 640px) {
+    @include arp.apply(".home-diagram", 1100/575);
+}
+
+.paypal-disclaimer {
+    font-size: 13.5px;
+    display: block;
+}
+
+.paypal-disclaimer a {
+    display: block;
+}
+
+@media all and (min-width: 600px) {
+    .offer-card__price .paypal-credit-text {
+        margin: 0 3em;
+    }
+}

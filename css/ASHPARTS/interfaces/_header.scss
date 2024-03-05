@@ -1,0 +1,106 @@
+$breakpoint: 1000px !default;
+$breakpoint-max: 999px !default;
+
+@use "../interfaces/dtm";
+
+@use "../themes/fonts";
+@use "../themes/colors";
+
+@use "../layouts/nav" with (
+    $background-color: white,
+    $font-color: currentColor,
+    $open-button-color: currentColor,
+    $close-button-color: colors.$first,
+    $breakpoint: $breakpoint,
+    $breakpoint-max: $breakpoint-max
+);
+@use "../layouts/form";
+@use "../layouts/group";
+
+@use "../components/logo";
+@use "../components/toggle-icons";
+
+@mixin nav {
+    #{dtm.$select-dtm} {
+        #{nav.$select} {
+            @include dtm.unset-icomoon;
+        }
+    }
+
+    @include nav.new {
+        font: 1.5rem/1 fonts.$first, sans-serif;
+
+        @include logo.new;
+
+        &__banner {
+            flex: 1 1 100%;
+            font: 1.3rem/1 fonts.$second, sans-serif;
+            letter-spacing: 1.5px;
+        }
+
+        &__menu &__list {
+            margin: 0.5rem;
+
+            > a {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        &__picture {
+            max-width: 50px;
+        }
+
+        &__drop__link {
+            @include group.gutter;
+            margin: 0;
+
+            > span {
+                display: flex;
+                align-items: center;
+                text-align: left;
+                flex: 1;
+            }
+        }
+    }
+
+    @include nav.bar {
+
+    }
+    @include nav.drawer {
+        &__list > &__logo {
+            left: -1rem;
+        }
+    }
+    @include nav.profile;
+    @include nav.standalone;
+    @include nav.dropdown-grid;
+    @include nav.dropdown-stack;
+
+    @include toggle-icons.new;
+    @include toggle-icons.checkbox(
+        "#{nav.$select}__toggle",
+        scale(0),
+        scale(0.75)
+    );
+
+    @include nav.icon-text;
+
+    @content;
+}
+
+@mixin search {
+    @include form.search;
+    @include form.underline;
+    @include form.field-icon;
+
+    #{nav.$select} {
+        &__form {
+            margin: 1rem;
+            max-width: 600px;
+            flex: 1 1 100%;
+        }
+    }
+
+    @content;
+}

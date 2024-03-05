@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{54E6808F-5C4E-4526-A8D0-F433F0734F32}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ASH</RootNamespace>
+    <AssemblyName>ASH</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dtm.InternationalFramework">
+      <HintPath>..\..\..\ReferencedLibraries\Dtm.InternationalFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=1.1.0.0, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\ReferencedLibraries\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Payflow_dotNET, Version=4.3.0.0, Culture=neutral, PublicKeyToken=14aa1e8d77f2a97c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\ReferencedLibraries\Payflow_dotNET.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.Abstractions.dll</HintPath>
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Routing, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.Routing.dll</HintPath>
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\ProductDetailsController.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MediaPlayer.cs" />
+    <Compile Include="Models\ProductReview.cs" />
+    <Compile Include="Models\ProductCategory.cs" />
+    <Compile Include="Models\ProductImages.cs" />
+    <Compile Include="Models\ProductItem.cs" />
+    <Compile Include="PageHandlers\GlobalPageHandler.cs" />
+    <Compile Include="PageHandlers\PaymentFormPageHandler.cs" />
+    <Compile Include="PageHandlers\UpsellNamePageHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reviews\AmazonReviews.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="05vrro9htih3c65wwtr7ow32l1sw9j.html" />
+    <Content Include="0hqaeqiqirg6zgiyr5mlb305wz438r.html" />
+    <Content Include="3e13tncgqd3k1u22hfm1bow8ku7z33.html" />
+    <Content Include="9e5ly78fhmuqq2hccbk6epfkc082eu.html" />
+    <Content Include="ASHPARTS\Views\Pages\Checkout.ascx" />
+    <Content Include="ASHPARTS\Views\Pages\Confirmation.aspx" />
+    <Content Include="ASHPARTS\Views\Pages\ConfirmationReviewPage.aspx" />
+    <Content Include="ASHPARTS\Views\Pages\FAQ.aspx" />
+    <Content Include="ASHPARTS\Views\Pages\Footer.ascx" />
+    <Content Include="ASHPARTS\Views\Pages\GetVersionScripts.ascx" />
+    <Content Include="ASHPARTS\Views\Pages\GetVersionStyles.ascx" />
+    <Content Include="ASHPARTS\Views\Pages\Header.ascx" />
+    <Content Include="ASHPARTS\Views\Pages\Index.aspx" />
+    <Content Include="ASHPARTS\Views\Pages\PaymentForm.aspx" />
+    <Content Include="ASHPARTS\Views\Pages\PictureCarousel.ascx" />
+    <Content Include="ASHPARTS\Views\Pages\ProcessPayment.aspx" />
+    <Content Include="ASHPARTS\Views\Pages\Product.ascx" />
+    <Content Include="ASHPARTS\Views\Pages\ProductCategory.ascx" />
+    <Content Include="ASHPARTS\Views\Pages\ProductDetailPage.aspx" />
+    <Content Include="ASHPARTS\Views\Pages\ProductNav.ascx" />
+    <Content Include="ASHPARTS\Views\Pages\SubPage.aspx" />
+    <Content Include="ASHPARTS\Views\Pages\SummaryReviewTable.ascx" />
+    <Content Include="ASHPARTS\Views\Pages\Warranties.aspx" />
+    <Content Include="c3tdko6qthd9xcwtvc793ce9myvxe8.html" />
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="igcuv7vzpuuo0tgv76vu0hv1zrfonw.html" />
+    <Content Include="ihqioprwo95io4hmwqnybeg749n48o.html" />
+    <Content Include="VersionViews\1.0000\Views\Pages\Confirmation.aspx" />
+    <Content Include="VersionViews\2.0000\Views\Pages\Footer.ascx" />
+    <Content Include="VersionViews\Views\Pages\ConfirmationReviewPage.aspx" />
+    <Content Include="VersionViews\Views\Pages\ContactInfo.ascx" />
+    <Content Include="VersionViews\Views\Pages\Footer.ascx" />
+    <Content Include="VersionViews\Views\Pages\Index.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="VersionViews\Views\Layouts\ConfirmationLayout.master" />
+    <Content Include="VersionViews\Views\Layouts\InternalLayout.master" />
+    <Content Include="VersionViews\Views\Pages\PaymentForm.aspx" />
+    <Content Include="VersionViews\Views\Pages\PaymentInfo.ascx" />
+    <Content Include="VersionViews\Views\Web.config" />
+    <Content Include="Web.config" />
+    <Content Include="android-chrome-192x192.png" />
+    <Content Include="android-chrome-512x512.png" />
+    <Content Include="apple-touch-icon-144x144.png" />
+    <Content Include="browserconfig.xml" />
+    <Content Include="favicon.svg" />
+    <Content Include="mstile-150x150.png" />
+    <Content Include="site.webmanifest" />
+    <Content Include="safari-pinned-tab.svg" />
+    <Content Include="apple-touch-icon.png" />
+    <Content Include="fonts\amazonember_bd-webfont.woff2" />
+    <Content Include="fonts\amazonember_bd-webfont.woff" />
+    <Content Include="fonts\amazonember_rg-webfont.woff2" />
+    <Content Include="fonts\amazonember_rg-webfont.woff" />
+    <Content Include="fonts\amazonember_lt-webfont.woff2" />
+    <Content Include="fonts\amazonember_lt-webfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="VersionViews\1.0000\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ASHPARTS\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ASHPARTS\Views\Layouts\InternalLayout.master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ASHPARTS\Views\Layouts\ConfirmationLayout.master" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Choose>
+    <When Condition="'$(Auto)'=='1'">
+      <ItemGroup>
+        <Reference Include="Dtm.InternationalFramework">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>Framework\Dtm.InternationalFramework.dll</HintPath>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <Otherwise />
+  </Choose>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Import Project="..\..\..\ReferencedLibraries\CustomDeploy.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53460</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

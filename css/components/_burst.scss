@@ -1,0 +1,21 @@
+@use "../models/colors";
+@use "../models/fonts";
+
+@mixin ui($size: 2.5em) {
+    text-transform: uppercase;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: colors.get(second);
+    border: 2px solid colors.get(first);
+    color: colors.get(first);
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 0;
+    width: #{$size};
+    height: #{$size};
+    border-radius: 100%;
+
+    @content;
+}

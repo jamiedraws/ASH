@@ -1,0 +1,58 @@
+/**
+* @prettier
+*/
+
+$select: ".checkbox-with-image" !default;
+
+@mixin new {
+	#{$select} {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		font-size: 15px;
+		border: 1px solid #ccc;
+		background: #f8f8f8;
+		cursor: pointer;
+
+		> * {
+			display: block;
+			margin: 1rem;
+		}
+
+		&__checkbox-text {
+			display: flex;
+			align-items: center;
+			flex: 0 1 600px;
+			margin: 0;
+
+			> [role="checkbox"] {
+				flex-shrink: 0;
+			}
+
+			> * {
+				display: block;
+				margin: 1rem;
+			}
+		}
+
+		&__text {
+			flex: 1 1 300px;
+
+			> * {
+				display: block;
+			}
+
+			> strong {
+				font-size: 20px;
+			}
+		}
+
+		picture {
+			flex: 0 1 319px;
+		}
+
+		@content;
+	}
+}

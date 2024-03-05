@@ -1,0 +1,4 @@
+@use "../interfaces/ui-page";
+@use "../interfaces/ui-header" as header;
+
+@include header.nav;

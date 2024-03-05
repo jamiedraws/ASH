@@ -1,0 +1,99 @@
+@use "../../../Shared/css/template/dtm/components/card";
+@use "../../../Shared/css/template/dtm/components/expando";
+
+@use "../themes/colors";
+@use "../components/copy";
+@use "../media/contain";
+
+@use "../layouts/group";
+
+$select: ".card" !default;
+
+@mixin new {
+    @include card.model($select, colors.$first) {
+        &__tab {
+            position: relative;
+            z-index: 2;
+        }
+
+        &__underline {
+            text-decoration: underline;
+        }
+
+        &__copy {
+            @include copy.separate;
+        }
+
+        &__group {
+            @include group.container;
+            justify-content: space-around;
+
+            > * {
+                flex: 1 1 auto;
+                margin: 1rem;
+            }
+        }
+
+        &__strong {
+            font-weight: bold;
+        }
+
+        &__figure {
+            text-align: center;
+            @include copy.separate;
+        }
+
+        ol {
+            list-style-type: decimal;
+        }
+
+        &__alpha-list {
+            list-style-type: lower-latin;
+
+            > ol {
+                list-style-type: decimal;
+            }
+        }
+
+        picture {
+            background: whitesmoke;
+        }
+
+        @content;
+    }
+
+    #{contain.$select} {
+        &--product {
+            @include contain.ratio(1/1);
+            margin: auto;
+            max-width: 800px;
+        }
+    }
+}
+
+@mixin image-text-chart {
+    #{$select} {
+        dl {
+            @include copy.separate(2rem);
+        }
+
+        dt {
+            text-align: center;
+            font-size: 1.75em;
+        }
+
+        em {
+            font-style: italic;
+        }
+    }
+
+    #{contain.$select} {
+        &--diagram-echoshow5 {
+            @include contain.ratio(1920/794);
+        }
+
+        &--diagram-echoshow8 {
+            @include contain.ratio(1500/620);
+        }
+    }
+}

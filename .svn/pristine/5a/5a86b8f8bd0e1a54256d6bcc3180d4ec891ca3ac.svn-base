@@ -1,0 +1,259 @@
+@use "../themes/colors";
+@use "../themes/fonts";
+@use "../themes/background";
+
+@use "../layouts/queries";
+@use "../layouts/document" with (
+    $container: queries.$xl,
+    $breakpoint: queries.$document
+);
+@use "../layouts/section" with (
+    $container: queries.$document
+);
+@use "../layouts/view";
+@use "../layouts/group";
+@use "../layouts/form" with (
+    $border-color: colors.$border
+);
+@use "../layouts/slide";
+@use "../layouts/quote";
+@use "../layouts/article";
+@use "../layouts/hero" with (
+    $breakpoint: queries.$hero
+);
+@use "../layouts/page" with (
+    $breakpoint: queries.$hero
+);
+
+@use "../media/load-item";
+@use "../media/contain";
+
+@use "../interfaces/header" with (
+    $breakpoint: queries.$nav,
+    $breakpoint-max: queries.$nav-max
+);
+@use "../interfaces/footer";
+@use "../interfaces/toast";
+@use "../interfaces/product";
+@use "../interfaces/dtm";
+
+@use "../components/card";
+@use "../components/title";
+@use "../components/copy";
+@use "../components/checkbox-with-image";
+@use "../components/button";
+@use "../components/circular";
+@use "../components/chart";
+@use "../components/banner";
+@use "../components/icons";
+@use "../components/dropdown";
+@use "../components/list";
+@use "../components/link";
+@use "../components/skip-link";
+
+@use "../../../Shared/css/template/dtm/components/modal" with (
+    $color: white,
+    $background-color: rgba(0,0,0,0.4)
+);
+
+@use "../../../Shared/css/template/dtm/utils/scope";
+@use "../utils/delay-input";
+@use "../utils/defer";
+
+// for the critical rendering path
+@mixin critical {
+    @include dtm.new;
+    @include fonts.request;
+    @include document.new;
+    @include defer.new;
+    @include view.new;
+    @include section.new;
+    @include copy.new;
+
+    @include skip-link.new;
+    @include link.new;
+    @include link.inline;
+    @media all and (max-width: queries.$md) {
+        @include link.hide;
+    }
+
+    @include background.new;
+    @include contain.new;
+    @include form.new;
+    @include delay-input.new;
+
+    #{contain.$select} {
+        &--logo {
+            @include contain.ratio(226/70);
+            max-width: 22.6rem;
+        }
+
+        &--icon {
+            &-search {
+                @include contain.ratio(1/1);
+                flex: 0 1 2.5em;
+            }
+
+            &-bag {
+                @include contain.ratio(125/150);
+                flex: 0 1 2em;
+            }
+        }
+
+        &--square {
+            @include contain.ratio(1/1);
+        }
+    }
+
+    @include icons.new;
+
+    @include header.nav;
+    @include header.search;
+    @include circular.new {
+        color: currentColor;
+
+        &:hover,
+        &:focus {
+            color: colors.$dark;
+        }
+    }
+    @include circular.pill;
+
+    @include banner.new;
+    @include modal.new {
+        font-size: 2rem;
+    }
+
+    @include scope.for-template {
+        @include button.new(colors.$second, colors.$light) {
+            text-transform: uppercase;
+            font-family: fonts.$first, sans-serif;
+        }
+
+        @include button.third;
+    }
+
+    @content;
+}
+
+@mixin checkout {
+    @include form.checkout {
+        #{form.$select} {
+            &__review {
+                @include dtm.set-order-table-layout;
+            }
+        }
+    }
+    #reviewOrder {
+        @include dtm.set-order-table-color;
+    }
+}
+
+// defer rendering at the base level
+@mixin defer {
+    @include group.new;
+    @include load-item.new;
+    @include slide.new;
+
+    @include background.dark;
+    @include background.image;
+    @include background.pattern;
+
+    @include title.new;
+    @include article.new;
+
+    @include checkout;
+
+    @include footer.new;
+    @include footer.separate-list-with-text;
+    @media all and (max-width: queries.$md) {
+        @include footer.convert-to-block-list;
+    }
+
+    @include toast.new;
+    @include toast.polite;
+    @include toast.theme-state;
+
+    #{contain.$select} {
+        &--circle {
+            @include contain.ratio(1/1);
+            border-radius: 100%;
+        }
+    }
+
+    @content;
+}
+
+@mixin landing-page($critical: false) {
+    @if $critical {
+        @include page.new;
+    } @else {
+        @include defer;
+        @include product.collection;
+        @include product.grid;
+        @include checkbox-with-image.new;
+
+        #{contain.$select} {
+            &--rush-shipping-badge {
+                @include contain.ratio(319/71);
+                max-width: 319px;
+            }
+
+            &--ssl {
+                @include contain.ratio(1/1);
+                max-width: 100px;
+            }
+        }
+    }
+
+    @content;
+}
+
+// home page
+@mixin index($critical: false) {
+    @if $critical {
+        @include hero.new;
+    } @else {
+        @include landing-page;
+    }
+}
+
+// product detail page
+@mixin product-detail-page($critical: false) {
+    @if $critical {
+        @include group.new;
+        @include load-item.new;
+        @include slide.new;
+
+        @include product.single;
+        @include product.grid;
+    }
+}
+
+// search results page
+@mixin search-results($critical: false) {
+    @if $critical {
+        @include page.new;
+    } @else {
+        @include product.grid;
+    }
+}
+
+@mixin warranty {
+    @include landing-page;
+    @include dropdown.new;
+    @include article.image-text;
+
+    @include list.block;
+}
+
+@mixin faq($inherit: true) {
+    @if $inherit {
+        @include landing-page;
+    }
+
+    @include card.new;
+    @include card.image-text-chart;
+    @include chart.new;
+    @content;
+}

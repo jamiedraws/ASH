@@ -1,0 +1,83 @@
+.product-details__close {
+  font-size: 0.5em;
+}
+.product-details__article:not(.product-details__article--is-visible) {
+  display: none;
+}
+.product-details ul {
+  column-width: 20em;
+}
+
+.modal__close {
+  flex: 0 0 3em;
+  width: 3em;
+  height: 3em;
+  display: block;
+  border: none;
+  background: none;
+  position: relative;
+}
+.modal__close::before, .modal__close::after {
+  content: "";
+  width: 0.2em;
+  height: inherit;
+  background: currentColor;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  transition: transform 300ms ease-out 0.35s;
+}
+.modal__close::before {
+  transform-origin: top right;
+  transform: rotateZ(-45deg) scaleY(1.35);
+  right: auto;
+}
+.modal__close::after {
+  transform-origin: top left;
+  transform: rotateZ(45deg) scaleY(1.35);
+  transition-delay: 0.7s;
+  left: auto;
+}
+.modal--hidden .modal__close::before {
+  transform: rotateZ(-45deg) scaleY(0);
+}
+.modal--hidden .modal__close::after {
+  transform: rotateZ(45deg) scaleY(0);
+}
+
+.modal {
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal__stage {
+  background: white;
+  box-shadow: 0 0 1em black;
+  padding: 1em;
+  flex: 1;
+}
+.modal__close {
+  float: right;
+}
+
+.product__modal {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  bottom: 0;
+  top: auto;
+  margin: 0;
+}
+.product__modal--is-visible {
+  pointer-events: all;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*# sourceMappingURL=product-details.css.map */

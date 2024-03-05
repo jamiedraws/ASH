@@ -1,0 +1,40 @@
+@use "../themes/colors";
+
+$select: ".title" !default;
+
+@mixin new {
+    #{$select} {
+//         text-transform: uppercase;
+        margin: 2rem 0;
+//         font-weight: bold;
+        color: colors.$fourth;
+
+        &__picture {
+            margin: auto;
+        }
+
+        &__text {
+            > small {
+                display: block;
+            }
+            sup {
+                font-size: 0.6em;
+            }
+        }
+
+        &__small {
+            font-size: 80%;
+        }
+
+        &__light {
+            font-weight: 400;
+            text-transform: none;
+        }
+
+        &__center {
+            text-align: center;
+        }
+
+        @content;
+    }
+}
